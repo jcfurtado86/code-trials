@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://c652340cj8tbj"]
+
+[ext_resource type="Shader" path="res://shaders/hole_circle.gdshader" id="1_ipvgy"]
+[ext_resource type="Script" path="res://scripts/tutorial_layer.gd" id="1_ugcvv"]
+[ext_resource type="FontFile" uid="uid://d4cruh03p3ty4" path="res://assets/Fonts/RevMiniPixel.ttf" id="3_f7q7j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kil1x"]
+shader = ExtResource("1_ipvgy")
+shader_parameter/hole_position = Vector2(0.5, 0.5)
+shader_parameter/hole_radius = 0.15
+shader_parameter/softness = 0.02
+shader_parameter/darkness = 0.45
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ugcvv")
+
+[node name="bg_overlay" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_kil1x")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.447059)
+
+[node name="Panel" type="Panel" parent="Control"]
+texture_filter = 1
+offset_left = 800.0
+offset_top = 60.0
+offset_right = 1140.0
+offset_bottom = 160.0
+auto_translate = false
+
+[node name="Label" type="Label" parent="Control/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = -31.5
+offset_right = 155.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_f7q7j")
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 2
+autowrap_mode = 3

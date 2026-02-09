@@ -1,23 +1,18 @@
 extends Control
 
-# Botões de níveis
 var level_buttons = []
 var last_completed_level_from_game_data: int = 0 
 
 @onready var transition: CanvasLayer = $transition
 
-# Texturas para estrelas (configure no Inspector)
 @export var star_texture: Texture2D
 @export var gray_star_texture: Texture2D
 
-# Dicionário que guarda as referências das estrelas de cada botão
 var level_star_icons := {}
 
 func _ready():
-	# Carrega progresso do GameData
 	if is_instance_valid(GameData):
 		last_completed_level_from_game_data = GameData.last_completed_level
-		print("level_select_menu.gd: Último nível completado carregado do GameData = ", last_completed_level_from_game_data)
 	else:
 		print("level_select_menu.gd: Erro: Variável global 'GameData' não é válida. Progresso não será carregado no menu de seleção.")
 		last_completed_level_from_game_data = 0 
@@ -25,7 +20,6 @@ func _ready():
 
 	transition.visible = false
 	
-	# Lista de botões (adicione todos os que tiver)
 	level_buttons = [
 		$VBoxContainer/GridContainer/VBoxContainer/Button,
 		$VBoxContainer/GridContainer/VBoxContainer2/Button,
@@ -37,13 +31,11 @@ func _ready():
 		$VBoxContainer/GridContainer/VBoxContainer8/Button
 	]
 	
-	# Configura cada botão com base no progresso
 	for i in range(level_buttons.size()):
 		var button = level_buttons[i]
 		var level_number = i + 1
 		button.text = "Level %d" % level_number
 		
-		# Pega o overlay de estrelas
 		var overlay = button.get_node("star_overlay") if button.has_node("star_overlay") else null
 
 		if overlay and overlay.has_node("HBoxContainer"):
@@ -54,7 +46,7 @@ func _ready():
 				hbox_container.get_node("Star3")
 			]
 			level_star_icons[level_number] = star_nodes
-			_atualizar_estrelas_do_nivel(level_number) # Chama para carregar as estrelas no início
+			_atualizar_estrelas_do_nivel(level_number)
 			
 			overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			if hbox_container:
@@ -63,32 +55,28 @@ func _ready():
 					if star:
 						star.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			
-			# Começa invisível para mostrar só no mouse (se o nível estiver desbloqueado)
 			if level_number <= last_completed_level_from_game_data + 1:
 				overlay.visible = false
 				button.connect("mouse_entered", _on_button_mouse_entered.bind(overlay))
 				button.connect("mouse_exited", _on_button_mouse_exited.bind(overlay))
 			else:
-				# Nível bloqueado → overlay sempre invisível, não responde ao mouse
 				overlay.visible = false 
 
-		# Bloqueio/desbloqueio de botões
 		if level_number > last_completed_level_from_game_data + 1:
 			button.disabled = true
-			button.modulate = Color.GRAY # Opcional: Efeito visual para botão bloqueado
+			button.modulate = Color.GRAY
 			if button.has_node("bg_overlay"):
-				button.get_node("bg_overlay").visible = true # Mostra o bg_overlay para bloqueio
+				button.get_node("bg_overlay").visible = true
 		else:
 			button.connect("pressed", _on_level_button_pressed.bind(level_number))
 			if button.has_node("bg_overlay"):
-				button.get_node("bg_overlay").visible = false # Esconde o bg_overlay para desbloqueio
+				button.get_node("bg_overlay").visible = false 
 
 
 func _atualizar_estrelas_do_nivel(level_number: int):
 	var recorde = 0
 	if is_instance_valid(GameData):
-		# Acesso às estrelas do GameData.level_stars usando a chave de STRING
-		recorde = GameData.level_stars.get(str(level_number), 0) # Retorna 0 se o nível não tiver estrelas salvas
+		recorde = GameData.level_stars.get(str(level_number), 0)
 	else:
 		print("level_select_menu.gd: Erro: GameData não é válido ao tentar atualizar estrelas.")
 
