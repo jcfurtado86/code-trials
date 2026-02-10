@@ -35,10 +35,8 @@ color = Color(0, 0, 0, 0.447059)
 [node name="Panel" type="Panel" parent="Control"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 800.0
-offset_top = 60.0
-offset_right = 1140.0
-offset_bottom = 160.0
+offset_right = 340.0
+offset_bottom = 100.0
 auto_translate = false
 
 [node name="Label" type="Label" parent="Control/Panel"]
