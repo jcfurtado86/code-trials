@@ -43,7 +43,6 @@ func concluir_objetivo_computador():
 	# Salvar progresso global (nível e estrelas)
 	if GameData.has_method("save_progress"):
 		GameData.save_progress(level_number, stars_earned)
-		print("Level %d concluído com %d estrela(s)." % [level_number, stars_earned])
 	else:
 		print("Erro: 'GameData' não possui o método 'save_progress'.")
 
