@@ -47,9 +47,17 @@ func _next_step() -> void:
 	current_step = steps[step_index]
 	tutorial_step(current_step)
 
+func restart_tutorial() -> void:
+	visible = true
+	step_index = 0
+	if steps.is_empty():
+		return
+	current_step = steps[step_index]
+	tutorial_step(current_step)
+
 
 func _finish_tutorial() -> void:
-	queue_free()
+	visible = false
 
 func tutorial_step(step: TutorialStep) -> void:
 	match step:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b68dehgm88n8f"]
+[gd_scene load_steps=20 format=3 uid="uid://b68dehgm88n8f"]
 
 [ext_resource type="Script" path="res://scripts/maps.gd" id="1_8oe4n"]
 [ext_resource type="Texture2D" uid="uid://cttk4h1sudh2f" path="res://assets/Free Industrial Zone Tileset/2 Background/Background.png" id="2_est6q"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://beijv3dcnw1ts" path="res://prefabs/spikes_area.tscn" id="5_s7hrn"]
 [ext_resource type="PackedScene" uid="uid://b5sgue78hwjow" path="res://actors/player.tscn" id="6_5sw8a"]
 [ext_resource type="PackedScene" uid="uid://tond4dw4y40m" path="res://commands/ComandoParar.tscn" id="6_eugdd"]
-[ext_resource type="PackedScene" uid="uid://dban0dsbdglg0" path="res://scenes/pause_menu.tscn" id="7_miswx"]
 [ext_resource type="PackedScene" uid="uid://cqfj3kd2iqgwe" path="res://commands/ComandoRepetir.tscn" id="7_xl7lc"]
 [ext_resource type="PackedScene" uid="uid://cicfrprcsw5y5" path="res://commands/ComandoSe.tscn" id="8_na0en"]
 [ext_resource type="PackedScene" uid="uid://dflntd4tv6247" path="res://scenes/transition.tscn" id="8_v2ukb"]
@@ -1542,9 +1541,6 @@ position = Vector2(48, 152)
 [node name="spikes-area" parent="." instance=ExtResource("5_s7hrn")]
 position = Vector2(320, 309.333)
 rect_w = 440.0
-
-[node name="pause_menu" parent="." instance=ExtResource("7_miswx")]
-visible = false
 
 [node name="transition" parent="." instance=ExtResource("8_v2ukb")]
 visible = false

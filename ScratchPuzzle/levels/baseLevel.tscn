@@ -1,12 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://doqpj3kg0vddk"]
+[gd_scene load_steps=17 format=3 uid="uid://doqpj3kg0vddk"]
 
 [ext_resource type="Script" path="res://scripts/baseLevel.gd" id="1_i8lrg"]
 [ext_resource type="FontFile" uid="uid://d4cruh03p3ty4" path="res://assets/Fonts/RevMiniPixel.ttf" id="2_wp66i"]
 [ext_resource type="Texture2D" uid="uid://b6bp06msf1ya2" path="res://assets/Items & UI/Mini UI/gray_star.png" id="3_hk0uf"]
 [ext_resource type="Script" path="res://scripts/ComandsContainer.gd" id="3_ovs63"]
-[ext_resource type="PackedScene" uid="uid://c652340cj8tbj" path="res://scenes/tutorial_layer.tscn" id="4_85u0q"]
+[ext_resource type="PackedScene" uid="uid://bo0ojirj03ey5" path="res://scenes/tutorial_layer.tscn" id="4_85u0q"]
+[ext_resource type="PackedScene" uid="uid://dban0dsbdglg0" path="res://scenes/pause_menu.tscn" id="4_wm8qj"]
 [ext_resource type="Texture2D" uid="uid://dedk3n2d1ntu3" path="res://assets/Items & UI/Mini UI/star.png" id="5_vn0uj"]
 [ext_resource type="Script" path="res://scripts/dropArea.gd" id="6_4n43j"]
+[ext_resource type="Texture2D" uid="uid://g2d00iyyshu0" path="res://assets/20251126darkDwellers_v_1_0/20251125optionsButton1-Sheet.png" id="8_63te6"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="9_nv0mv"]
+[ext_resource type="Texture2D" uid="uid://cmh8k6rlt2mnn" path="res://assets/20251126darkDwellers_v_1_0/20251125helpButton1-Sheet.png" id="9_vvdi2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb8tq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dttb8"]
+atlas = ExtResource("8_63te6")
+region = Rect2(0, 0, 31, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg6wc"]
+atlas = ExtResource("8_63te6")
+region = Rect2(64, 0, 31, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5slm7"]
+atlas = ExtResource("9_vvdi2")
+region = Rect2(0, 0, 31, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siqpn"]
+atlas = ExtResource("9_vvdi2")
+region = Rect2(64, 0, 31, 31)
 
 [node name="baseLevel" type="PanelContainer"]
 anchors_preset = 15
@@ -20,6 +42,9 @@ gray_star_texture = ExtResource("3_hk0uf")
 current_level = "level_6"
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_85u0q")]
+
+[node name="pause_menu" parent="." instance=ExtResource("4_wm8qj")]
+visible = false
 
 [node name="LevelArea" type="PanelContainer" parent="."]
 layout_direction = 1
@@ -134,6 +159,33 @@ theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
 text = " EXECUTAR"
 
+[node name="HUD" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_eb8tq")
+script = ExtResource("9_nv0mv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HUD"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/HUD/HBoxContainer"]
+custom_minimum_size = Vector2(62, 62)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_dttb8")
+texture_pressed = SubResource("AtlasTexture_kg6wc")
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HUD/HBoxContainer"]
+custom_minimum_size = Vector2(62, 62)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_5slm7")
+texture_pressed = SubResource("AtlasTexture_siqpn")
+stretch_mode = 0
+
 [node name="LevelInfo" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -237,3 +289,5 @@ vertical_alignment = 2
 [connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton" to="." method="_on_execute_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton" to="MarginContainer/ExecuteArea" method="_on_execute_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HUD/HBoxContainer/TextureButton" to="MarginContainer/HUD" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HUD/HBoxContainer/TextureButton2" to="MarginContainer/HUD" method="_on_texture_button_2_pressed"]

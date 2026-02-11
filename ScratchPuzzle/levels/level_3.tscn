@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cctqc4v3ks2a5"]
+[gd_scene load_steps=15 format=3 uid="uid://cctqc4v3ks2a5"]
 
 [ext_resource type="Script" path="res://scripts/maps.gd" id="1_1smty"]
 [ext_resource type="Texture2D" uid="uid://cttk4h1sudh2f" path="res://assets/Free Industrial Zone Tileset/2 Background/Background.png" id="1_i4eqo"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://x5wlxpxhn24p" path="res://commands/ComandoEsperar.tscn" id="4_nh2jg"]
 [ext_resource type="PackedScene" uid="uid://bndv7omluqw2h" path="res://scenes/goal.tscn" id="4_oeox0"]
 [ext_resource type="PackedScene" uid="uid://b5sgue78hwjow" path="res://actors/player.tscn" id="5_hqy4s"]
-[ext_resource type="PackedScene" uid="uid://dban0dsbdglg0" path="res://scenes/pause_menu.tscn" id="6_ma0pv"]
 [ext_resource type="PackedScene" uid="uid://dflntd4tv6247" path="res://scenes/transition.tscn" id="7_qyq1h"]
 [ext_resource type="PackedScene" uid="uid://docutuehop66x" path="res://scenes/next_level_menu.tscn" id="10_cackk"]
 
@@ -1482,9 +1481,6 @@ position = Vector2(323.333, 88.6667)
 [node name="next_level_menu" parent="." instance=ExtResource("10_cackk")]
 visible = false
 next_level = "level_4"
-
-[node name="pause_menu" parent="." instance=ExtResource("6_ma0pv")]
-visible = false
 
 [node name="transition" parent="." instance=ExtResource("7_qyq1h")]
 visible = false

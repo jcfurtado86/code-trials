@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cfi1vkywlihep"]
+[gd_scene load_steps=13 format=3 uid="uid://cfi1vkywlihep"]
 
 [ext_resource type="Script" path="res://scripts/maps.gd" id="1_eheuh"]
 [ext_resource type="Texture2D" uid="uid://cttk4h1sudh2f" path="res://assets/Free Industrial Zone Tileset/2 Background/Background.png" id="1_m8cqi"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b2lufwa56g4lf" path="res://assets/Cyberpunk platformer - World starter/tileset/main_tileset.png" id="3_uega1"]
 [ext_resource type="PackedScene" uid="uid://bndv7omluqw2h" path="res://scenes/goal.tscn" id="4_qo76t"]
 [ext_resource type="PackedScene" uid="uid://b5sgue78hwjow" path="res://actors/player.tscn" id="5_6dwqk"]
-[ext_resource type="PackedScene" uid="uid://dban0dsbdglg0" path="res://scenes/pause_menu.tscn" id="6_nsduj"]
 [ext_resource type="PackedScene" uid="uid://dflntd4tv6247" path="res://scenes/transition.tscn" id="7_etxqe"]
 [ext_resource type="PackedScene" uid="uid://docutuehop66x" path="res://scenes/next_level_menu.tscn" id="10_8myxh"]
 
@@ -1436,9 +1435,6 @@ scale = Vector2(1.5, 1.5)
 
 [node name="player" parent="." instance=ExtResource("5_6dwqk")]
 position = Vector2(216, 155.2)
-
-[node name="pause_menu" parent="." instance=ExtResource("6_nsduj")]
-visible = false
 
 [node name="next_level_menu" parent="." instance=ExtResource("10_8myxh")]
 visible = false
