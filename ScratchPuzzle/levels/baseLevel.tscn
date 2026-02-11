@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://doqpj3kg0vddk"]
+[gd_scene load_steps=9 format=3 uid="uid://doqpj3kg0vddk"]
 
 [ext_resource type="Script" path="res://scripts/baseLevel.gd" id="1_i8lrg"]
 [ext_resource type="FontFile" uid="uid://d4cruh03p3ty4" path="res://assets/Fonts/RevMiniPixel.ttf" id="2_wp66i"]
 [ext_resource type="Texture2D" uid="uid://b6bp06msf1ya2" path="res://assets/Items & UI/Mini UI/gray_star.png" id="3_hk0uf"]
 [ext_resource type="Script" path="res://scripts/ComandsContainer.gd" id="3_ovs63"]
-[ext_resource type="PackedScene" uid="uid://c652340cj8tbj" path="res://scenes/tutorial_layer.tscn" id="4_85u0q"]
+[ext_resource type="PackedScene" path="res://scenes/tutorial_layer.tscn" id="4_85u0q"]
 [ext_resource type="Texture2D" uid="uid://dedk3n2d1ntu3" path="res://assets/Items & UI/Mini UI/star.png" id="5_vn0uj"]
 [ext_resource type="Script" path="res://scripts/dropArea.gd" id="6_4n43j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb8tq"]
 
 [node name="baseLevel" type="PanelContainer"]
 anchors_preset = 15
@@ -20,6 +22,7 @@ gray_star_texture = ExtResource("3_hk0uf")
 current_level = "level_6"
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_85u0q")]
+visible = false
 
 [node name="LevelArea" type="PanelContainer" parent="."]
 layout_direction = 1
@@ -133,6 +136,22 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
 text = " EXECUTAR"
+
+[node name="HUD" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_eb8tq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HUD"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="MarginContainer/HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="MarginContainer/HUD/HBoxContainer"]
+layout_mode = 2
 
 [node name="LevelInfo" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
