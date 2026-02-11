@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cmkvpv3uuloye"]
+[gd_scene load_steps=21 format=3 uid="uid://cmkvpv3uuloye"]
 
 [ext_resource type="Script" path="res://scripts/maps.gd" id="1_5qiyt"]
 [ext_resource type="PackedScene" uid="uid://dfv7dhi7km4wx" path="res://commands/ComandoAndar.tscn" id="2_163kf"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cqfj3kd2iqgwe" path="res://commands/ComandoRepetir.tscn" id="7_7buks"]
 [ext_resource type="PackedScene" uid="uid://beijv3dcnw1ts" path="res://prefabs/spikes_area.tscn" id="7_u7tn4"]
 [ext_resource type="PackedScene" uid="uid://cicfrprcsw5y5" path="res://commands/ComandoSe.tscn" id="8_e0gly"]
-[ext_resource type="PackedScene" uid="uid://dban0dsbdglg0" path="res://scenes/pause_menu.tscn" id="8_mbqll"]
 [ext_resource type="PackedScene" uid="uid://dflntd4tv6247" path="res://scenes/transition.tscn" id="9_qm5fe"]
 [ext_resource type="PackedScene" uid="uid://dhitjlkcbw28i" path="res://prefabs/moving_platform.tscn" id="10_mepvq"]
 [ext_resource type="PackedScene" uid="uid://docutuehop66x" path="res://scenes/next_level_menu.tscn" id="18_4ek72"]
@@ -1560,9 +1559,6 @@ rect_w = 142.0
 [node name="spikes-area3" parent="." instance=ExtResource("7_u7tn4")]
 position = Vector2(488, 310.933)
 rect_w = 112.0
-
-[node name="pause_menu" parent="." instance=ExtResource("8_mbqll")]
-visible = false
 
 [node name="transition" parent="." instance=ExtResource("9_qm5fe")]
 visible = false

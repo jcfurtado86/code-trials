@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c652340cj8tbj"]
+[gd_scene load_steps=5 format=3 uid="uid://bo0ojirj03ey5"]
 
 [ext_resource type="Shader" path="res://shaders/hole_circle.gdshader" id="1_ipvgy"]
 [ext_resource type="Script" path="res://scripts/tutorial_layer.gd" id="1_ugcvv"]

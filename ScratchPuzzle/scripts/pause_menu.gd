@@ -8,11 +8,9 @@ extends CanvasLayer
 	$menu_holder/HBoxContainer/Star2,
 	$menu_holder/HBoxContainer/Star3
 ]
-# Texturas para estrelas (configure no Inspector)
 @export var star_texture: Texture2D
 @export var gray_star_texture: Texture2D
 
-# Função para atualizar o visual das estrelas
 func atualizar_estrelas(objetivos: Array):
 	for i in range(star_icons.size()):
 		if i < objetivos.size():
@@ -24,18 +22,13 @@ func atualizar_estrelas(objetivos: Array):
 func resetar_estrelas():
 	for star in star_icons:
 		star.texture = gray_star_texture
-	
-	
+
 #################################################################################
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
 	resetar_estrelas()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
@@ -50,7 +43,6 @@ func _on_resume_button_pressed() -> void:
 		SoundManager.play_button()
 	get_tree().paused = false
 	visible = false
-
 
 func _on_quit_button_pressed() -> void:
 	if is_instance_valid(SoundManager):

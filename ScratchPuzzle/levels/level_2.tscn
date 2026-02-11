@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnaurapub8byo"]
+[gd_scene load_steps=14 format=3 uid="uid://dnaurapub8byo"]
 
 [ext_resource type="Script" path="res://scripts/maps.gd" id="1_amd8h"]
 [ext_resource type="Texture2D" uid="uid://cttk4h1sudh2f" path="res://assets/Free Industrial Zone Tileset/2 Background/Background.png" id="1_phlhn"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dtfay4bduce72" path="res://commands/ComandoVirar.tscn" id="3_yagif"]
 [ext_resource type="PackedScene" uid="uid://bndv7omluqw2h" path="res://scenes/goal.tscn" id="4_rca8y"]
 [ext_resource type="PackedScene" uid="uid://b5sgue78hwjow" path="res://actors/player.tscn" id="5_wnpvj"]
-[ext_resource type="PackedScene" uid="uid://dban0dsbdglg0" path="res://scenes/pause_menu.tscn" id="6_jpcie"]
 [ext_resource type="PackedScene" uid="uid://dflntd4tv6247" path="res://scenes/transition.tscn" id="7_b7x4x"]
 [ext_resource type="PackedScene" uid="uid://docutuehop66x" path="res://scenes/next_level_menu.tscn" id="11_biui3"]
 
@@ -1439,9 +1438,6 @@ scale = Vector2(1.5, 1.5)
 
 [node name="player" parent="." instance=ExtResource("5_wnpvj")]
 position = Vector2(440, 152)
-
-[node name="pause_menu" parent="." instance=ExtResource("6_jpcie")]
-visible = false
 
 [node name="transition" parent="." instance=ExtResource("7_b7x4x")]
 visible = false

@@ -11,7 +11,6 @@ extends PanelContainer
 	$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer2/Star,
 	$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer3/Star
 ]
-# Texturas para estrelas (configure no Inspector)
 @export var star_texture: Texture2D
 @export var gray_star_texture: Texture2D
 
@@ -36,36 +35,31 @@ func _ready():
 	if clear_button and not clear_button.pressed.is_connected(_on_clear_button_pressed):
 		clear_button.pressed.connect(_on_clear_button_pressed)
 
-	load_level(current_level) # Carrega o primeiro mapa e seus comandos
+	load_level(current_level)
 
 func load_level(level_name: String):
-	# Garante que a área de execução está pronta
 	if execute_area.has_method("prepare_for_scene_change"):
 		execute_area.prepare_for_scene_change()
 	
-	# Limpeza tradicional
 	_on_clear_button_pressed()
 	load_map(level_name)
 	update_level_info(level_name)
 	
-	# Notifica que o nível foi carregado
 	if execute_area.has_method("scene_change_completed"):
 		execute_area.scene_change_completed()
 
 func load_map(level_name: String):
 	execute_button.disabled = false
 	if current_map:
-		current_map.queue_free()  # Remove o mapa anterior
+		current_map.queue_free()
 	
 	if level_name in maps:
 		current_map = maps[level_name].instantiate()
 		current_map.main_node = self
-		#current_map.scale = Vector2(1, 1)  # Ajusta a escala do mapa
 		map_container.add_child(current_map)
 		
 		player = current_map.get_node("player")
 		if player:
-			# Conecta o sinal de morte do player a este script
 			if not player.player_died.is_connected(_on_player_died):
 				player.player_died.connect(_on_player_died)
 		else:
@@ -73,37 +67,28 @@ func load_map(level_name: String):
 		load_commands()
 
 func load_commands():
-	# Remove todos os comandos anteriores
 	for child in command_container.get_children():
 		child.queue_free()
 	
-	# Adiciona os novos comandos conforme o nível
 	if current_map and "comandos" in current_map:
 		for command_scene in current_map.comandos:
-			if command_scene:  # Verifica se a cena é válida
+			if command_scene:
 				var command_instance = command_scene.instantiate()
 				command_container.add_child(command_instance)
 
 func update_level_info(level_name: String):
-	# Obtém o título do nível (por exemplo, LEVEL 1, LEVEL 2, etc.)
 	$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/LevelTitle.text = "LEVEL - " + level_name.split("_")[1]
 	
-	# Adiciona os novos stars conforme o nível
 	if current_map and "stars" in current_map:
-		# Acessa as estrelas do nível atual
 		var level_stars = current_map.stars
 		
-		# Verifica se o array de estrelas tem o tamanho esperado
 		if level_stars.size() == 3:
-			# Atualiza as labels das estrelas
 			$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer/Label.text = level_stars[0]  # Atualiza a primeira estrela
 			$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = level_stars[1]  # Atualiza a segunda estrela
 			$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer3/Label.text = level_stars[2]  # Atualiza a terceira estrela
 		
-			# Inicializa estrelas como cinzas
 			resetar_estrelas()
 
-# Função para atualizar o visual das estrelas
 func atualizar_estrelas(objetivos: Array):
 	for i in range(star_icons.size()):
 		if i < objetivos.size():
@@ -121,26 +106,20 @@ func _on_player_died():
 	load_map(current_map.nome)
 
 func _on_restart_button_pressed() -> void:
-	# Reseta os objetivos antes de recarregar o mapa
 	if current_map and current_map.has_method("resetar_objetivos"):
 		current_map.resetar_objetivos()
-	# Recarrega o mapa
 	load_map(current_map.nome)
-	# Atualiza a UI para mostrar estrelas cinzas
 	resetar_estrelas()
 
 func _on_clear_button_pressed() -> void:
 
 	if execute_area.has_method("safe_clear"):
 		execute_area.safe_clear()
-		# Força uma atualização do frame
 		await get_tree().process_frame
-		# Reativa o sistema de drop
 		execute_area.setup_drop_indicator()
 	else:
 		for child in execute_area.get_children():
 			child.queue_free()
-		# Garante a recriação do indicador
 		await get_tree().process_frame
 		execute_area.setup_drop_indicator()
 
@@ -153,18 +132,15 @@ func _on_execute_button_pressed() -> void:
 	if current_map and current_map.has_method("set_total_comandos"):
 		current_map.set_total_comandos(total_comando)
 
-# Função recursiva para contar filhos de VBoxContainer
 func count_children_recursively(node: Node) -> int:
 	var total = 0
 	
-	# Percorre todos os filhos do nó atual
 	for child in node.get_children():
 		if child is TextureRect:
-			total += 1  # Conta o filho atual
+			total += 1
 
-		# Verifica se o filho tem um VBoxContainer como filho
 		for grandchild in child.get_children():
 			if grandchild is VBoxContainer:
-				total += count_children_recursively(grandchild)  # Chama a recursão para o VBoxContainer
+				total += count_children_recursively(grandchild)
 		
 	return total
