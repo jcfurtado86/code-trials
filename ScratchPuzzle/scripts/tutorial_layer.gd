@@ -20,21 +20,18 @@ const COMMANDS_RADIUS_PX: float = 450.0
 const EXECUTION_RADIUS_PX: float = 500.0
 
 func _ready() -> void:
-	if steps.is_empty():
-		steps = [
-			TutorialStep.OBJECTIVES,
-			TutorialStep.COMMANDS_AREA,
-			TutorialStep.COMMANDS_BLOCK,
-			TutorialStep.EXECUTION
-		]
-
-	step_index = 0
-	current_step = steps[step_index]
-	tutorial_step(current_step)
+	pass
 
 func setup_tutorial(step_list: Array, command_text: String) -> void:
 	steps = step_list
 	command_block_text = command_text
+	step_index = 0
+
+	if steps.is_empty():
+		return
+
+	current_step = steps[step_index]
+	tutorial_step(current_step)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

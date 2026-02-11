@@ -42,6 +42,8 @@ func _configurar_tutorial() -> void:
 			],
 			_get_command_block_text()
 		)
+	elif level_number == 8:
+		tutorial._finish_tutorial()
 	else:
 		tutorial.setup_tutorial(
 			[ TutorialStep.COMMANDS_BLOCK ],
@@ -57,10 +59,18 @@ func _get_command_block_text() -> String:
 			return "Este é o comando ANDAR.\nAo executar, o personagem anda continuamente para frente até receber outro comando."
 		"virar":
 			return "Este é o comando VIRAR.\nEle altera a direção do personagem sem movê-lo."
+		"esperar":
+			return "Este é o comando ESPERAR.\nVocê determina um tempo entre a execução de um comando e outro."
+		"pular":
+			return "Este é o comando PULAR.\nAo executar, o personagem pula na direção que estiver se movimentando."
+		"parar":
+			return "Este é o comando PARAR.\nAo executar, o personagem interrompe seu movimento imediatamente."
 		"repetir":
-			return "Este é o comando REPETIR.\nEle executa os comandos internos várias vezes."
+			return "Este é o comando REPETIR.\nVocê determina a quantidade de vezes que deve executar os comandos filhos dele."
+		"se":
+			return "Este é o comando SE.\nEle executa os comandos dentro do bloco apenas se a condição definida for verdadeira."
 		_:
-			return "Este é um comando especial.\nUse-o para controlar o personagem."
+			return ""
 
 
 func _definir_numero_do_level():
