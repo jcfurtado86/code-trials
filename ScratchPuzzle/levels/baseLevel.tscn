@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://doqpj3kg0vddk"]
+[gd_scene load_steps=8 format=3 uid="uid://doqpj3kg0vddk"]
 
 [ext_resource type="Script" path="res://scripts/baseLevel.gd" id="1_i8lrg"]
 [ext_resource type="FontFile" uid="uid://d4cruh03p3ty4" path="res://assets/Fonts/RevMiniPixel.ttf" id="2_wp66i"]
 [ext_resource type="Texture2D" uid="uid://b6bp06msf1ya2" path="res://assets/Items & UI/Mini UI/gray_star.png" id="3_hk0uf"]
 [ext_resource type="Script" path="res://scripts/ComandsContainer.gd" id="3_ovs63"]
+[ext_resource type="PackedScene" uid="uid://c652340cj8tbj" path="res://scenes/tutorial_layer.tscn" id="4_85u0q"]
 [ext_resource type="Texture2D" uid="uid://dedk3n2d1ntu3" path="res://assets/Items & UI/Mini UI/star.png" id="5_vn0uj"]
 [ext_resource type="Script" path="res://scripts/dropArea.gd" id="6_4n43j"]
 
@@ -17,6 +18,8 @@ script = ExtResource("1_i8lrg")
 star_texture = ExtResource("5_vn0uj")
 gray_star_texture = ExtResource("3_hk0uf")
 current_level = "level_6"
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_85u0q")]
 
 [node name="LevelArea" type="PanelContainer" parent="."]
 layout_direction = 1

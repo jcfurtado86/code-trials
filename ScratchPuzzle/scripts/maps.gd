@@ -6,25 +6,74 @@ extends Node2D
 @export var nome : String = ""
 @export var comandos: Array[PackedScene] = []
 @export var stars: Array[String] = ["ACESSE O COMPUTADOR", "", ""]
+@export var comando_requerido: String = "andar"
+@export var max_comandos: int = 1 
+@export var tutorial_path: NodePath = "../../CanvasLayer/Control"
 
-# Objetivos configuráveis
-@export var comando_requerido: String = "andar"  # Comando específico para estrela 2
-@export var max_comandos: int = 1                # Máximo de comandos para estrela 3
+const TutorialStep = preload("res://scripts/tutorial_steps.gd").TutorialStep
 
 var total_comandos_usados := 0
 var comandos_usados := []
 var main_node = null
 var level_number: int = 0
 
-# Variáveis para rastrear objetivos
-var objetivos_concluidos := [false, false, false]  # Computador, Comando Específico, Máx Comandos
+var objetivos_concluidos := [false, false, false]
 
 func _ready():
 	process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	stars[1] = "USE O COMANDO " + comando_requerido.to_upper()
 	stars[2] = "USE NO MÁXIMO %d COMANDOS" % max_comandos
 	resetar_objetivos()
-	
+	_definir_numero_do_level()
+	_configurar_tutorial()
+
+func _configurar_tutorial() -> void:
+	var tutorial = _get_tutorial()
+	if tutorial == null:
+		return
+
+	if level_number == 1:
+		tutorial.setup_tutorial(
+			[
+				TutorialStep.OBJECTIVES,
+				TutorialStep.COMMANDS_AREA,
+				TutorialStep.COMMANDS_BLOCK,
+				TutorialStep.EXECUTION
+			],
+			_get_command_block_text()
+		)
+	elif level_number == 8:
+		tutorial._finish_tutorial()
+	else:
+		tutorial.setup_tutorial(
+			[ TutorialStep.COMMANDS_BLOCK ],
+			_get_command_block_text()
+		)
+
+func _get_tutorial():
+	return get_node_or_null(tutorial_path)
+
+func _get_command_block_text() -> String:
+	match comando_requerido:
+		"andar":
+			return "Este é o comando ANDAR.\nAo executar, o personagem anda continuamente para frente até receber outro comando."
+		"virar":
+			return "Este é o comando VIRAR.\nEle altera a direção do personagem sem movê-lo."
+		"esperar":
+			return "Este é o comando ESPERAR.\nVocê determina um tempo entre a execução de um comando e outro."
+		"pular":
+			return "Este é o comando PULAR.\nAo executar, o personagem pula na direção que estiver se movimentando."
+		"parar":
+			return "Este é o comando PARAR.\nAo executar, o personagem interrompe seu movimento imediatamente."
+		"repetir":
+			return "Este é o comando REPETIR.\nVocê determina a quantidade de vezes que deve executar os comandos filhos dele."
+		"se":
+			return "Este é o comando SE.\nEle executa os comandos dentro do bloco apenas se a condição definida for verdadeira."
+		_:
+			return ""
+
+
+func _definir_numero_do_level():
 	var parts = nome.split("_")
 	if parts.size() == 2 and parts[0] == "level":
 		level_number = int(parts[1])
@@ -32,23 +81,17 @@ func _ready():
 func resetar_objetivos():
 	objetivos_concluidos = [false, false, false]
 
-# Chamado quando o jogador alcança o computador
 func concluir_objetivo_computador():
 	objetivos_concluidos[0] = true
 	atualizar_ui_objetivos()
-	
-	# Conta quantas estrelas o jogador ganhou nesse level
+
 	var stars_earned = objetivos_concluidos.count(true)
 
-	# Salvar progresso global (nível e estrelas)
 	if GameData.has_method("save_progress"):
 		GameData.save_progress(level_number, stars_earned)
-		print("Level %d concluído com %d estrela(s)." % [level_number, stars_earned])
 	else:
 		print("Erro: 'GameData' não possui o método 'save_progress'.")
 
-
-# Chamado quando um comando é executado
 func registrar_comando(nome_comando: String):
 	if nome_comando == comando_requerido:
 		objetivos_concluidos[1] = true
@@ -57,7 +100,6 @@ func registrar_comando(nome_comando: String):
 	atualizar_ui_objetivos()
 
 func set_total_comandos(total_comandos: int):
-	# Verifica o objetivo de limite de comandos
 	objetivos_concluidos[2] = (total_comandos <= max_comandos)
 	atualizar_ui_objetivos()
 

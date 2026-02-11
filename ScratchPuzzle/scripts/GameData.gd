@@ -33,7 +33,6 @@ func save_progress(level_to_save: int, stars_earned: int):
 		}
 		save_file.store_line(JSON.stringify(data))
 		save_file.close()
-		print("GameData.gd: Progresso salvo:", data)
 	else:
 		print("GameData.gd: Erro ao abrir arquivo para salvar.")
 
@@ -50,7 +49,6 @@ func load_progress():
 					level_stars = {}
 					for key in loaded_stars:
 						level_stars[str(key)] = loaded_stars[key]
-					print("GameData.gd: Progresso carregado:", data)
 			save_file.close()
 	else:
 		print("GameData.gd: Nenhum progresso salvo encontrado.")
