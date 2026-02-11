@@ -59,3 +59,40 @@ theme_override_fonts/font = ExtResource("3_f7q7j")
 theme_override_font_sizes/font_size = 18
 vertical_alignment = 2
 autowrap_mode = 3
+
+[node name="Panel2" type="Panel" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -521.0
+offset_top = -96.0
+offset_right = -33.0
+offset_bottom = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+auto_translate = false
+
+[node name="Label" type="Label" parent="Control/Panel2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -9.0
+offset_right = 250.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_f7q7j")
+theme_override_font_sizes/font_size = 18
+text = "Clique em qualquer lugar da tela para continuar ->"
+autowrap_mode = 3
