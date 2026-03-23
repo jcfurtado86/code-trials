@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var next_level_menu: CanvasLayer = $next_level_menu
-@onready var pause_menu: CanvasLayer = $pause_menu
+@onready var pause_menu: CanvasLayer = preload("res://scenes/pause_menu.tscn").instantiate()
 
 @export var nome : String = ""
 @export var comandos: Array[PackedScene] = []
