@@ -1,0 +1,123 @@
+[gd_scene load_steps=5 format=3 uid="uid://bluh8c0rqnuqw"]
+
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_wgwew"]
+[ext_resource type="Shader" path="res://shaders/background.gdshader" id="4_3je0u"]
+[ext_resource type="FontFile" uid="uid://d4cruh03p3ty4" path="res://assets/Fonts/RevMiniPixel.ttf" id="5_2icod"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kou0m"]
+shader = ExtResource("4_3je0u")
+shader_parameter/dimensions = Vector2(1024, 600)
+shader_parameter/small_stars = 50.0
+shader_parameter/small_stars_far_size = 0.5
+shader_parameter/small_stars_near_size = 1.0
+shader_parameter/large_stars = 8.0
+shader_parameter/large_stars_far_size = 0.5
+shader_parameter/large_stars_near_size = 1.0
+shader_parameter/far_stars_color = Color(0.5, 0, 1, 1)
+shader_parameter/near_stars_color = Color(1, 1, 1, 1)
+shader_parameter/base_scroll_speed = 0.05
+shader_parameter/additional_scroll_speed = 0.05
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wgwew")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kou0m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 146.5
+offset_top = 116.0
+offset_right = 275.5
+offset_bottom = 152.0
+size_flags_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_2icod")
+theme_override_font_sizes/font_size = 28
+text = "< Voltar"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -670.0
+offset_top = -252.5
+offset_right = 670.0
+offset_bottom = 252.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("5_2icod")
+theme_override_font_sizes/font_size = 48
+text = "CREDITOS"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_2icod")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]CODE TRIALS
+Trabalho de Conclusão de Curso
+Universidade Federal do Amapá (UNIFAP)
+
+AUTORES
+José Olímpio de Freitas Dias Júnior
+José Kaynã Pereira de Sousa Bitencourt
+
+ORIENTADOR
+Prof. Dr. Julio Furtado
+
+SOBRE O PROJETO
+Jogo de puzzles focado no estímulo do pensamento computacional. Desenvolvido para desafiar a resolução de problemas utilizando lógica e algoritmos de programação passo a passo.
+
+FERRAMENTAS E TECNOLOGIAS
+Godot Engine
+
+PUBLICAÇÕES E CÓDIGO-FONTE
+[url=https://github.com/jcfurtado86/code-trials]Repositório no GitHub[/url]
+[url=INSERIR_LINK_DO_ARTIGO_AQUI]Artigo Publicado[/url]
+[/center]"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="meta_clicked" from="VBoxContainer/PanelContainer/MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

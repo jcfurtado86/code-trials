@@ -12,6 +12,6 @@ func _on_button_pressed(_button: Button) -> void:
 		"PlayButton":
 			get_tree().change_scene_to_file("res://scenes/level_select_menu.tscn")
 		"CreditsButton":
-			pass
+			get_tree().change_scene_to_file("res://scenes/credits.tscn")
 		"QuitButton":
 			get_tree().quit()
