@@ -25,8 +25,8 @@ var endless_playing := false
 var endless_music: AudioStream
 
 func _ready():
-	menu_music = load("res://assets/Sounds/leap.WAV")
-	menu_player.volume_db = -40
+	menu_music = load("res://assets/Sounds/moonlight.mp3")
+	menu_player.volume_db = -10
 	step_sound = load("res://assets/Sounds/walk.ogg")
 	death_sound = load("res://assets/Sounds/sfx_hurt.ogg") 
 	button_sound = load("res://assets/Sounds/bong_001.ogg") 
@@ -41,8 +41,8 @@ func _ready():
 	#load("res://Assets/Sounds/music2.ogg"),
 	#load("res://Assets/Sounds/music3.ogg"),
 	#]
-	endless_music = load("res://assets/Sounds/leap.WAV")
-	endless_player.volume_db = -40
+	endless_music = load("res://assets/Sounds/moonlight.mp3")
+	endless_player.volume_db = -10
 	
 func _process(_delta):
 	var current_scene = get_tree().current_scene
