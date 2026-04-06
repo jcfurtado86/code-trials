@@ -52,12 +52,13 @@ func load_map(level_name: String):
 	execute_button.disabled = false
 	if current_map:
 		current_map.queue_free()
-	
+
 	if level_name in maps:
 		current_map = maps[level_name].instantiate()
 		current_map.main_node = self
 		map_container.add_child(current_map)
-		
+		_scale_map_to_container()
+
 		player = current_map.get_node("player")
 		if player:
 			if not player.player_died.is_connected(_on_player_died):
@@ -65,6 +66,16 @@ func load_map(level_name: String):
 		else:
 			print("Player não encontrado no mapa!")
 		load_commands()
+
+const NATIVE_MAP_SIZE = Vector2(576, 324)
+
+func _scale_map_to_container() -> void:
+	if not current_map or not map_container:
+		return
+	await get_tree().process_frame
+	var container_size = map_container.size
+	var scale_factor = min(container_size.x / NATIVE_MAP_SIZE.x, container_size.y / NATIVE_MAP_SIZE.y)
+	current_map.scale = Vector2(scale_factor, scale_factor)
 
 func load_commands():
 	for child in command_container.get_children():

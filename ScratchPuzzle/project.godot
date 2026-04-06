@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="ScratchPuzzle"
+config/name="code-trials"
 run/main_scene="res://scenes/main_menu.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,9 +26,10 @@ SoundManager="*res://scenes/sound_manager.tscn"
 
 [display]
 
-window/size/viewport_width=1633
-window/size/viewport_height=768
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
+window/stretch/mode="canvas_items"
 
 [rendering]
 
