@@ -1,7 +1,9 @@
 extends PanelContainer
 
 @onready var execute_area: PanelContainer = $MarginContainer/ExecuteArea
-@onready var v_box_container: VBoxContainer = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
+@onready var v_box_container: VBoxContainer = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer/VBoxContainer
+@onready var tab_container: TabContainer = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer
+@onready var code_edit: CodeEdit = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Codigo/CodeEdit
 @onready var map_container: Node = $LevelArea
 @onready var command_container: Node = $MarginContainer/CommandArea/MarginContainer/VBoxContainer/GridContainer
 @onready var clear_button: Button = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ClearButton
@@ -137,9 +139,14 @@ func _on_clear_button_pressed() -> void:
 func _on_execute_button_pressed() -> void:
 	current_map.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	
-	var total_comando = count_children_recursively(v_box_container)
-	print(total_comando)
-	
+	var total_comando := 0
+	if tab_container.current_tab == 0:
+		total_comando = count_children_recursively(v_box_container)
+	else:
+		var result = CodeParser.parse(code_edit.text)
+		if result.success:
+			total_comando = result.command_count
+
 	if current_map and current_map.has_method("set_total_comandos"):
 		current_map.set_total_comandos(total_comando)
 
