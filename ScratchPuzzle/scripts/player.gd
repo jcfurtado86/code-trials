@@ -5,7 +5,7 @@ signal player_died()
 const SCALE_FACTOR = 2.5
 
 const SPEED = 100.0 * SCALE_FACTOR
-const JUMP_VELOCITY = -200.0 * SCALE_FACTOR
+const JUMP_VELOCITY = -240.0 * SCALE_FACTOR
 const RAYCAST_DISTANCE = 25 * SCALE_FACTOR  # Distância para detectar obstáculos
 const HOLE_DETECTION_DISTANCE = 50.0 * SCALE_FACTOR  # Distância para detectar buracos
 
