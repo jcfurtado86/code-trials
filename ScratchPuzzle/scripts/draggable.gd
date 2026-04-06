@@ -21,6 +21,14 @@ func _ready():
 		command_container = get_node_or_null("VBoxContainer")
 		repeticao_input = get_node_or_null("repeticaoInput")
 		nine_patch_rect = get_node_or_null("NinePatchRect")
+		if repeticao_input:
+			repeticao_input.get_line_edit().focus_entered.connect(func(): repeticao_input.get_line_edit().select_all())
+			var timer = Timer.new()
+			timer.one_shot = true
+			timer.wait_time = 0.5
+			timer.timeout.connect(func(): repeticao_input.apply())
+			repeticao_input.add_child(timer)
+			repeticao_input.get_line_edit().text_changed.connect(func(_t): timer.start())
 	# Se
 	if CommandType == 6:
 		command_container = get_node_or_null("VBoxContainer")
@@ -84,12 +92,31 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	var parent = get_parent()
 	if parent and parent.has_method("is_transitioning") and parent.is_transitioning:
 		return null
-		
+
 	var preview = TextureRect.new()
 	preview.texture = texture
 	preview.modulate = Color(1, 1, 1, 0.7)
 	set_drag_preview(preview)
 	return [self]
+
+func _is_in_palette() -> bool:
+	var parent = get_parent()
+	return parent and parent is GridContainer
+
+func _enter_tree() -> void:
+	# Desabilita inputs dos SpinBoxes quando na paleta de comandos
+	call_deferred("_update_input_mode")
+
+func _update_input_mode() -> void:
+	var in_palette = _is_in_palette()
+	if tempo_input:
+		tempo_input.mouse_filter = Control.MOUSE_FILTER_IGNORE if in_palette else Control.MOUSE_FILTER_STOP
+		tempo_input.get_line_edit().mouse_filter = Control.MOUSE_FILTER_IGNORE if in_palette else Control.MOUSE_FILTER_STOP
+	if repeticao_input:
+		repeticao_input.mouse_filter = Control.MOUSE_FILTER_IGNORE if in_palette else Control.MOUSE_FILTER_STOP
+		repeticao_input.get_line_edit().mouse_filter = Control.MOUSE_FILTER_IGNORE if in_palette else Control.MOUSE_FILTER_STOP
+	if condition_option:
+		condition_option.mouse_filter = Control.MOUSE_FILTER_IGNORE if in_palette else Control.MOUSE_FILTER_STOP
 
 func _notification(notification_type) -> void:
 	match notification_type:
