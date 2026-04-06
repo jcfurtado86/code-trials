@@ -26,6 +26,8 @@ var endless_music: AudioStream
 
 func _ready():
 	menu_music = load("res://assets/Sounds/moonlight.mp3")
+	if menu_music:
+		menu_music.loop = true
 	menu_player.volume_db = -10
 	step_sound = load("res://assets/Sounds/walk.ogg")
 	death_sound = load("res://assets/Sounds/sfx_hurt.ogg") 
@@ -42,6 +44,8 @@ func _ready():
 	#load("res://Assets/Sounds/music3.ogg"),
 	#]
 	endless_music = load("res://assets/Sounds/moonlight.mp3")
+	if endless_music:
+		endless_music.loop = true
 	endless_player.volume_db = -10
 	
 func _process(_delta):
