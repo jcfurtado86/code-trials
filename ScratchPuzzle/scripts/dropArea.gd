@@ -2,7 +2,7 @@ extends PanelContainer
 
 const COMMAND_NAMES = ["andar", "virar", "pular", "parar", "esperar", "repetir", "se"]
 @onready var target_node = $MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer/VBoxContainer
-@onready var level_area: Node = $"../../LevelArea"
+@onready var level_area: Node = $"../../../LevelArea"
 @onready var tab_container: TabContainer = $MarginContainer/VBoxContainer/TabContainer
 @onready var code_edit: CodeEdit = $MarginContainer/VBoxContainer/TabContainer/Codigo/CodeEdit
 @onready var error_label: Label = $MarginContainer/VBoxContainer/ErrorLabel

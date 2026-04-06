@@ -1,13 +1,13 @@
 extends PanelContainer
 
-@onready var execute_area: PanelContainer = $MarginContainer/ExecuteArea
-@onready var v_box_container: VBoxContainer = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer/VBoxContainer
-@onready var tab_container: TabContainer = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer
-@onready var code_edit: CodeEdit = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Codigo/CodeEdit
+@onready var execute_area: PanelContainer = $MarginContainer/LeftColumn/ExecuteArea
+@onready var v_box_container: VBoxContainer = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer/VBoxContainer
+@onready var tab_container: TabContainer = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer
+@onready var code_edit: CodeEdit = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Codigo/CodeEdit
 @onready var map_container: Node = $LevelArea
-@onready var command_container: Node = $MarginContainer/CommandArea/MarginContainer/VBoxContainer/GridContainer
-@onready var clear_button: Button = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ClearButton
-@onready var execute_button = $MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton
+@onready var command_container: Node = $MarginContainer/LeftColumn/CommandArea/MarginContainer/VBoxContainer/GridContainer
+@onready var clear_button: Button = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ClearButton
+@onready var execute_button = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton
 @onready var star_icons := [
 	$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer/Star,
 	$MarginContainer/LevelInfo/MarginContainer/VBoxContainer/HBoxContainer2/Star,

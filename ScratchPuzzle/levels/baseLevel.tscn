@@ -59,134 +59,141 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 20
 
-[node name="CommandArea" type="PanelContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(348, 250)
+[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CommandArea" type="PanelContainer" parent="MarginContainer/LeftColumn"]
+custom_minimum_size = Vector2(348, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("3_ovs63")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CommandArea"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftColumn/CommandArea"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CommandArea/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LeftColumn/CommandArea/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/CommandArea/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/LeftColumn/CommandArea/MarginContainer/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "Lista de Comandos
 "
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/CommandArea/MarginContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/LeftColumn/CommandArea/MarginContainer/VBoxContainer"]
 z_as_relative = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="ExecuteArea" type="PanelContainer" parent="MarginContainer/LeftColumn"]
+custom_minimum_size = Vector2(348, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-theme_override_constants/v_separation = 10
-columns = 2
-
-[node name="ExecuteArea" type="PanelContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(348, 350)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
 script = ExtResource("6_4n43j")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ExecuteArea"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftColumn/ExecuteArea"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ExecuteArea/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "Area de Execução"
 horizontal_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Blocos" type="Container" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Blocos" type="Container" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos"]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="Codigo" type="Container" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Codigo" type="Container" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="CodeEdit" type="CodeEdit" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Codigo"]
+[node name="CodeEdit" type="CodeEdit" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Codigo"]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_fonts/font = ExtResource("2_wp66i")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 placeholder_text = "// Digite seu código aqui
 // Ex: andar(); virar();"
 gutters_draw_line_numbers = true
 auto_brace_completion_enabled = true
 
-[node name="ErrorLabel" type="Label" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 40
 
-[node name="ClearButton" type="Button" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ClearButton" type="Button" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
 text = " LIMPAR"
 
-[node name="RestartButton" type="Button" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RestartButton" type="Button" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_wp66i")
 text = " REINICIAR"
 
-[node name="ExecuteButton" type="Button" parent="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ExecuteButton" type="Button" parent="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
@@ -319,9 +326,9 @@ text = "USE NO MÁXIMO 4 COMANDOS."
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]
-[connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton" to="." method="_on_execute_button_pressed"]
-[connection signal="pressed" from="MarginContainer/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton" to="MarginContainer/ExecuteArea" method="_on_execute_button_pressed"]
+[connection signal="pressed" from="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="pressed" from="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton" to="." method="_on_execute_button_pressed"]
+[connection signal="pressed" from="MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/HBoxContainer/ExecuteButton" to="MarginContainer/LeftColumn/ExecuteArea" method="_on_execute_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HUD/HBoxContainer/TextureButton" to="MarginContainer/HUD" method="_on_texture_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HUD/HBoxContainer/TextureButton2" to="MarginContainer/HUD" method="_on_texture_button_2_pressed"]
