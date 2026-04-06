@@ -1,5 +1,7 @@
 extends PanelContainer
 
+const MapGenerator = preload("res://scripts/map_generator.gd")
+
 @onready var execute_area: PanelContainer = $MarginContainer/LeftColumn/ExecuteArea
 @onready var v_box_container: VBoxContainer = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer/Blocos/ScrollContainer/VBoxContainer
 @onready var tab_container: TabContainer = $MarginContainer/LeftColumn/ExecuteArea/MarginContainer/VBoxContainer/TabContainer
@@ -31,13 +33,60 @@ extends PanelContainer
 var current_map = null
 @export var current_level = "level_1"
 var player = null
+var is_training_mode := false
+var training_difficulty: int = MapGenerator.Difficulty.EASY
+var _current_seed: int = -1
 
 func _ready():
 	add_to_group("MainNode")
 	if clear_button and not clear_button.pressed.is_connected(_on_clear_button_pressed):
 		clear_button.pressed.connect(_on_clear_button_pressed)
 
-	load_level(current_level)
+	if is_training_mode:
+		call_deferred("load_procedural")
+	else:
+		load_level(current_level)
+
+func start_training(difficulty: int) -> void:
+	is_training_mode = true
+	training_difficulty = difficulty
+	load_procedural()
+
+func load_procedural(new_map := true) -> void:
+	if execute_area.has_method("prepare_for_scene_change"):
+		execute_area.prepare_for_scene_change()
+
+	_on_clear_button_pressed()
+
+	execute_button.disabled = false
+	if current_map:
+		current_map.queue_free()
+
+	if new_map:
+		_current_seed = randi()
+	current_map = MapGenerator.generate(training_difficulty, _current_seed)
+	if not current_map:
+		print("❌ Falha ao gerar mapa!")
+		return
+	print("✅ Mapa gerado: ", current_map.name, " filhos: ", current_map.get_child_count())
+	current_map.main_node = self
+	map_container.add_child(current_map)
+	print("✅ Mapa adicionado ao container, player: ", current_map.get_node_or_null("player"))
+	_scale_map_to_container()
+
+	player = current_map.get_node("player")
+	if player and not player.player_died.is_connected(_on_player_died):
+		player.player_died.connect(_on_player_died)
+
+	load_commands()
+	update_level_info("treino_0")
+
+	if execute_area.has_method("scene_change_completed"):
+		execute_area.scene_change_completed()
+	if execute_area.has_method("find_map_and_player"):
+		execute_area.find_map_and_player()
+
+	current_map.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 
 func load_level(level_name: String):
 	if execute_area.has_method("prepare_for_scene_change"):
@@ -116,13 +165,20 @@ func resetar_estrelas():
 
 func _on_player_died():
 	resetar_estrelas()
-	load_map(current_map.nome)
+	if is_training_mode:
+		load_procedural(false)
+	else:
+		load_map(current_map.nome)
 
 func _on_restart_button_pressed() -> void:
-	if current_map and current_map.has_method("resetar_objetivos"):
-		current_map.resetar_objetivos()
-	load_map(current_map.nome)
-	resetar_estrelas()
+	if is_training_mode:
+		resetar_estrelas()
+		load_procedural(false)
+	else:
+		if current_map and current_map.has_method("resetar_objetivos"):
+			current_map.resetar_objetivos()
+		load_map(current_map.nome)
+		resetar_estrelas()
 
 func _on_clear_button_pressed() -> void:
 

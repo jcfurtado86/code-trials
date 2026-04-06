@@ -72,12 +72,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -670.0
-offset_top = -252.5
+offset_top = -400.0
 offset_right = 670.0
-offset_bottom = 252.5
+offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 80
+theme_override_constants/separation = 40
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -897,6 +897,52 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("5_bovdf")
 
+[node name="TrainingLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("2_ueyia")
+theme_override_font_sizes/font_size = 36
+text = "MODO INFINITO"
+horizontal_alignment = 1
+
+[node name="TrainingButtons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="TrainingEasy" type="Button" parent="VBoxContainer/TrainingButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ueyia")
+theme_override_font_sizes/font_size = 24
+text = "FÁCIL"
+
+[node name="TrainingMedium" type="Button" parent="VBoxContainer/TrainingButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ueyia")
+theme_override_font_sizes/font_size = 24
+text = "MÉDIO"
+
+[node name="TrainingHard" type="Button" parent="VBoxContainer/TrainingButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ueyia")
+theme_override_font_sizes/font_size = 24
+text = "DIFÍCIL"
+
 [node name="transition" parent="." instance=ExtResource("12_0cceo")]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TrainingButtons/TrainingEasy" to="." method="_on_training_easy_pressed"]
+[connection signal="pressed" from="VBoxContainer/TrainingButtons/TrainingMedium" to="." method="_on_training_medium_pressed"]
+[connection signal="pressed" from="VBoxContainer/TrainingButtons/TrainingHard" to="." method="_on_training_hard_pressed"]

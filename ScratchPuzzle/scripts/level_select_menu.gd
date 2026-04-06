@@ -101,7 +101,28 @@ func _on_button_pressed() -> void:
 	if is_instance_valid(SoundManager):
 		SoundManager.play_button()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-	
+
+func _on_training_easy_pressed() -> void:
+	_start_training(0)
+
+func _on_training_medium_pressed() -> void:
+	_start_training(1)
+
+func _on_training_hard_pressed() -> void:
+	_start_training(2)
+
+func _start_training(difficulty: int) -> void:
+	print("🎮 Iniciando modo treino, dificuldade: ", difficulty)
+	if is_instance_valid(SoundManager):
+		SoundManager.play_button()
+	var base_level_scene = load("res://levels/baseLevel.tscn")
+	var base_level = base_level_scene.instantiate()
+	base_level.is_training_mode = true
+	base_level.training_difficulty = difficulty
+	get_tree().root.add_child(base_level)
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = base_level
+
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed('ui_cancel'):
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
